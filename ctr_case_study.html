@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Computerized Transaction Record — Zachary Lu-Ming Fan</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ink: #111110;
+  --ink-60: #666662;
+  --ink-30: #b0b0aa;
+  --ink-10: #e8e8e4;
+  --paper: #fafaf8;
+  --paper-2: #f2f2ee;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); line-height: 1.6; }
+
+nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.25rem 3rem; background: var(--paper);
+  border-bottom: 0.5px solid var(--ink-10); position: sticky; top: 0; z-index: 100;
+}
+.nav-back {
+  font-family: 'Outfit', sans-serif; font-size: 11px; font-weight: 400;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-60);
+  text-decoration: none; display: flex; align-items: center; gap: 0.5rem; transition: color 0.2s;
+}
+.nav-back:hover { color: var(--ink); }
+.nav-name {
+  font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); text-decoration: none;
+}
+
+.case-hero { background: var(--ink); padding: 5rem 3rem 4rem; }
+.case-hero-inner { max-width: 900px; margin: 0 auto; }
+.case-eyebrow {
+  font-family: 'Outfit', sans-serif; font-size: 10px; font-weight: 400;
+  letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.3);
+  margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem;
+}
+.case-eyebrow::before { content: ''; display: block; width: 20px; height: 0.5px; background: rgba(255,255,255,0.3); }
+.case-title {
+  font-family: 'Outfit', sans-serif; font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 200; line-height: 1.1; color: #fff; letter-spacing: -0.03em; margin-bottom: 0.5rem;
+}
+.case-title span { font-weight: 500; }
+.case-subtitle { font-size: 15px; color: rgba(255,255,255,0.4); margin-bottom: 3rem; font-weight: 300; }
+.case-meta-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  border-top: 0.5px solid rgba(255,255,255,0.08); padding-top: 2rem;
+}
+.case-meta-item { padding-right: 2rem; }
+.case-meta-label {
+  font-family: 'Outfit', sans-serif; font-size: 9px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: rgba(255,255,255,0.25); margin-bottom: 0.4rem;
+}
+.case-meta-value { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.5; }
+
+.case-hero-img {
+  max-width: 900px; margin: 3rem auto 0; padding: 0 3rem;
+  border-radius: 6px; overflow: hidden;
+}
+.case-hero-img img { width: 100%; display: block; border-radius: 6px; }
+
+.case-content { max-width: 900px; margin: 0 auto; padding: 5rem 3rem; }
+.case-section { margin-bottom: 5rem; }
+
+.section-label {
+  font-family: 'Outfit', sans-serif; font-size: 10px; font-weight: 400;
+  letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-30);
+  margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.75rem;
+}
+.section-label::before { content: ''; display: block; width: 20px; height: 0.5px; background: var(--ink-30); }
+
+.section-heading {
+  font-family: 'Outfit', sans-serif; font-size: 1.6rem; font-weight: 300;
+  letter-spacing: -0.025em; color: var(--ink); margin-bottom: 1.25rem; line-height: 1.2;
+}
+.section-heading strong { font-weight: 500; }
+.section-body { font-size: 14px; color: var(--ink-60); line-height: 1.85; max-width: 660px; }
+
+.overview-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2.5rem;
+}
+.overview-block {
+  padding: 1.75rem; background: var(--paper-2);
+  border-radius: 4px; border: 0.5px solid var(--ink-10);
+}
+.overview-block-label {
+  font-family: 'Outfit', sans-serif; font-size: 9px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--ink-30); margin-bottom: 0.75rem;
+}
+.overview-block-text { font-size: 13px; color: var(--ink); line-height: 1.7; }
+
+.full-img {
+  width: 100%; border-radius: 4px; border: 0.5px solid var(--ink-10); display: block; margin-top: 2rem;
+}
+.img-caption {
+  font-size: 11px; color: var(--ink-30); letter-spacing: 0.04em; margin-top: 0.6rem; font-style: italic;
+}
+
+/* STAT PILLS */
+.stat-row {
+  display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap;
+}
+.stat-pill {
+  padding: 1.25rem 1.75rem; background: var(--ink); border-radius: 4px;
+  display: flex; flex-direction: column; gap: 0.25rem; flex: 1; min-width: 140px;
+}
+.stat-num {
+  font-family: 'Outfit', sans-serif; font-size: 2rem; font-weight: 200;
+  color: #fff; letter-spacing: -0.03em; line-height: 1;
+}
+.stat-label { font-size: 11px; color: rgba(255,255,255,0.4); letter-spacing: 0.04em; }
+
+/* COMPONENT GRID */
+.component-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem;
+}
+.component-card {
+  border: 0.5px solid var(--ink-10); border-radius: 4px; overflow: hidden;
+  background: var(--paper-2);
+}
+.component-card img { width: 100%; display: block; }
+.component-card-label {
+  padding: 0.6rem 0.85rem;
+  font-family: 'Outfit', sans-serif; font-size: 9px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--ink-30);
+  border-top: 0.5px solid var(--ink-10);
+}
+
+.component-card-wide {
+  grid-column: 1 / -1;
+  border: 0.5px solid var(--ink-10); border-radius: 4px; overflow: hidden;
+  background: var(--paper-2);
+}
+.component-card-wide img { width: 100%; display: block; }
+.component-card-wide .component-card-label {
+  padding: 0.6rem 0.85rem;
+  font-family: 'Outfit', sans-serif; font-size: 9px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--ink-30);
+  border-top: 0.5px solid var(--ink-10);
+}
+
+/* CASE TAGS */
+.case-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.5rem; }
+.case-tag {
+  font-size: 10px; letter-spacing: 0.07em; padding: 0.3rem 0.75rem;
+  border: 0.5px solid var(--ink-10); border-radius: 2rem; color: var(--ink-60);
+}
+
+/* VIDEO */
+.video-wrap {
+  margin-top: 2rem; border-radius: 6px; overflow: hidden;
+  border: 0.5px solid var(--ink-10); background: #000;
+}
+
+.video-wrap iframe { width: 100%; display: block; height: 500px; }
+
+.video-placeholder {
+  margin-top: 2rem; border-radius: 6px; overflow: hidden;
+  border: 0.5px dashed var(--ink-10); background: var(--paper-2);
+  padding: 4rem 2rem; text-align: center;
+}
+.video-placeholder-label {
+  font-family: 'Outfit', sans-serif; font-size: 11px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--ink-30);
+}
+
+/* BOTTOM NAV */
+.case-bottom-nav {
+  border-top: 0.5px solid var(--ink-10); padding: 3rem;
+  display: flex; align-items: center; justify-content: space-between;
+  max-width: 900px; margin: 0 auto;
+}
+.back-link {
+  font-family: 'Outfit', sans-serif; font-size: 11px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--ink-60); text-decoration: none;
+  display: flex; align-items: center; gap: 0.5rem; transition: color 0.2s;
+}
+.back-link:hover { color: var(--ink); }
+.next-project { display: flex; flex-direction: column; align-items: flex-end; gap: 0.25rem; text-decoration: none; }
+.next-label {
+  font-family: 'Outfit', sans-serif; font-size: 9px; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--ink-30);
+}
+.next-title {
+  font-family: 'Outfit', sans-serif; font-size: 1rem; font-weight: 400;
+  letter-spacing: -0.01em; color: var(--ink); transition: opacity 0.2s;
+}
+.next-project:hover .next-title { opacity: 0.6; }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+.case-hero-inner { animation: fadeUp 0.5s ease both; }
+
+@media (max-width: 768px) {
+  nav { padding: 1rem 1.5rem; }
+  .case-hero { padding: 3rem 1.5rem 2.5rem; }
+  .case-meta-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .case-content { padding: 3rem 1.5rem; }
+  .overview-grid { grid-template-columns: 1fr; }
+  .component-grid { grid-template-columns: 1fr; }
+  .stat-row { flex-direction: column; }
+  .case-bottom-nav { padding: 2rem 1.5rem; flex-direction: column; gap: 1.5rem; align-items: flex-start; }
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+  <a class="nav-back" href="index.html">← Back</a>
+  <a class="nav-name" href="index.html">Zachary Lu-Ming Fan</a>
+</nav>
+
+<div class="case-hero">
+  <div class="case-hero-inner">
+    <div class="case-eyebrow">Case Study · 02</div>
+    <h1 class="case-title"><span>Computerized</span><br>Transaction Record</h1>
+    <p class="case-subtitle">Department of Health, Hong Kong — Enterprise UI Design &amp; Design System</p>
+    <div class="case-meta-grid">
+      <div class="case-meta-item">
+        <div class="case-meta-label">Client</div>
+        <div class="case-meta-value">Dept. of Health, Hong Kong</div>
+      </div>
+      <div class="case-meta-item">
+        <div class="case-meta-label">Employer</div>
+        <div class="case-meta-value">LSCM R&amp;D Centre, Cyberport HK</div>
+      </div>
+      <div class="case-meta-item">
+        <div class="case-meta-label">My Role</div>
+        <div class="case-meta-value">UI/UX Designer</div>
+      </div>
+      <div class="case-meta-item">
+        <div class="case-meta-label">Year</div>
+        <div class="case-meta-value">2025</div>
+      </div>
+    </div>
+  </div>
+  <div class="case-hero-img">
+    <img src="CTR Homepage.png" alt="CTR Live Application">
+  </div>
+</div>
+
+<div class="case-content">
+
+  <!-- OVERVIEW -->
+  <div class="case-section">
+    <div class="section-label">Overview</div>
+    <h2 class="section-heading">A live government platform for<br><strong>antimicrobial transaction tracking.</strong></h2>
+    <p class="section-body">The Computerized Transaction Record (CTR) is an electronic web platform developed for the Hong Kong Department of Health, tasked by the High Level Steering Committee on Antimicrobial Resistance (HLSC). CTR provides licensed traders with a record-keeping system to record, view, and monitor antimicrobial transaction records — supporting the rational use and effectiveness monitoring of antimicrobials across Hong Kong.</p>
+    <div class="overview-grid">
+      <div class="overview-block">
+        <div class="overview-block-label">My Contribution</div>
+        <div class="overview-block-text">Joined the project mid-development as a UI/UX designer. Responsible for redesigning existing page layouts and building virtually the entire component library in Figma — enabling the development team to construct new features rapidly through reusable, nested components.</div>
+      </div>
+      <div class="overview-block">
+        <div class="overview-block-label">The Scale</div>
+        <div class="overview-block-text">The application serves licensed traders, hospitals, pharmacies, wholesalers, manufacturers, and government health personnel across Hong Kong. The platform is currently live and in active use by the Department of Health.</div>
+      </div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-pill">
+        <span class="stat-num">116+</span>
+        <span class="stat-label">Components built</span>
+      </div>
+      <div class="stat-pill">
+        <span class="stat-num">Live</span>
+        <span class="stat-label">Production application</span>
+      </div>
+      <div class="stat-pill">
+        <span class="stat-num">6+</span>
+        <span class="stat-label">User types served</span>
+      </div>
+      <div class="stat-pill">
+        <span class="stat-num">HK Gov</span>
+        <span class="stat-label">Department of Health</span>
+      </div>
+    </div>
+    <div class="case-tags">
+      <span class="case-tag">UI Design</span>
+      <span class="case-tag">UX Design</span>
+      <span class="case-tag">UX Research</span>
+      <span class="case-tag">Prototyping</span>
+      <span class="case-tag">Figma</span>
+      <span class="case-tag">Design Systems</span>
+      <span class="case-tag">Enterprise UX</span>
+      <span class="case-tag">Component Library</span>
+    </div>
+  </div>
+
+  <!-- DESIGN SYSTEM -->
+  <div class="case-section">
+    <div class="section-label">Design System</div>
+    <h2 class="section-heading">Establishing the visual foundation —<br><strong>colour, typography, and tokens.</strong></h2>
+    <p class="section-body">Before building components, I established the design system's visual language. The colour scheme spans a green-teal primary palette with a full grey scale, status colours for warnings, errors, and success states, and specialised sets for inline messages and notification centre elements. Typography is set in Roboto across 10 defined header and body levels.</p>
+    <img class="full-img" src="CTR Design system.png" alt="CTR Design System - Colour and Typography">
+    <div class="img-caption">Colour scheme and typography scale — established as the foundation of the CTR component library</div>
+  </div>
+
+  <!-- COMPONENT LIBRARY OVERVIEW -->
+  <div class="case-section">
+    <div class="section-label">Component Library</div>
+    <h2 class="section-heading">116+ components built from scratch<br><strong>in Figma.</strong></h2>
+    <p class="section-body">As a UI/UX designer on the project, I built virtually every UI component used across the CTR platform — from atomic elements like buttons and icons to complex composite components like multi-step transaction flows, data tables with pagination, and responsive navigation systems. Each component was built with variants and nested structures so the development team could assemble new pages and features rapidly.</p>
+    <img class="full-img" src="CTR Components Overview.png" alt="CTR Component Library Overview">
+    <div class="img-caption">Full component library overview — 116+ components across buttons, tables, navigation, forms, steppers, notifications, and more</div>
+  </div>
+
+  <!-- COMPONENT CLOSEUPS -->
+  <div class="case-section">
+    <div class="section-label">Component Detail</div>
+    <h2 class="section-heading">A closer look at<br><strong>selected components.</strong></h2>
+    <p class="section-body">Each component was built to handle the complexity of a regulated government enterprise application — multiple states, responsive variants, accessibility considerations, and strict consistency with the established design system.</p>
+
+    <div class="component-grid" style="margin-top:2rem;">
+
+      <div class="component-card-wide">
+        <img src="CTR Closeup Button and Header Components.png" alt="Buttons, Icons and Page Headers">
+        <div class="component-card-label">Buttons / Icons · Page &amp; Site Headers · Responsive Header variants</div>
+      </div>
+
+      <div class="component-card">
+        <img src="CTR Closeup Table Components 1.png" alt="Table Components">
+        <div class="component-card-label">Tables · Pagination · Steppers · Record Cards · User Management</div>
+      </div>
+
+      <div class="component-card">
+        <img src="CTR Closeup Filter Components.png" alt="Filter and Input Components">
+        <div class="component-card-label">Input Fields · Date Pickers · Filter Items · Autocomplete · Dropdowns · Checkboxes</div>
+      </div>
+
+      <div class="component-card">
+        <img src="CTR Closeup Transaction Components.png" alt="Transaction Components">
+        <div class="component-card-label">Transaction Draft Headers · Breadcrumbs · Header Messages &amp; Warnings</div>
+      </div>
+
+      <div class="component-card">
+        <img src="CTR Closeup Inline Message Component.png" alt="Inline Message Components">
+        <div class="component-card-label">Inline Messages — Info, Success, Warning &amp; Error states</div>
+      </div>
+
+      <div class="component-card">
+        <img src="CTR Closeup Date Picker Components.png" alt="Date Picker Components">
+        <div class="component-card-label">Calendar Picker — single, range, and year selection variants</div>
+      </div>
+
+      <div class="component-card-wide">
+        <img src="CTR Closeup Table Components 2.png" alt="Table Components 2">
+        <div class="component-card-label">Transaction · Product · Report List · Quantity/Balance · Receiver/Supplier · Dispense · Trader &amp; User Info Tables</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- VIDEO -->
+  <div class="case-section">
+    <div class="section-label">Feature Walkthrough</div>
+    <h2 class="section-heading">Seeing the application<br><strong>in action.</strong></h2>
+    <p class="section-body">The following walkthrough demonstrates one of the core user flows within the CTR platform — showing how the components, design system, and page layouts come together in the live application.</p>
+
+    <div class="video-wrap">
+      <video controls width="100%" style="border-radius: 6px; display: block;">
+        <source src="ctr_demo.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="img-caption" style="margin-top:0.75rem;">CSV Import: Dispense Case Success User flow demonstration — retrieved from https://ctr.drugoffice.gov.hk/#videoDemon</div>
+  </div>
+
+</div>
+
+<div class="case-bottom-nav">
+  <a class="back-link" href="index.html">← All projects</a>
+  <a class="next-project" href="homescope_case_study.html">
+    <span class="next-label">Next project</span>
+    <span class="next-title">HomeScope Mobile Application →</span>
+  </a>
+</div>
+
+</body>
+</html>

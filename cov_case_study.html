@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Passive Cooling Infrastructure — Zachary Lu-Ming Fan</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ink: #111110;
+  --ink-60: #666662;
+  --ink-30: #b0b0aa;
+  --ink-10: #e8e8e4;
+  --paper: #fafaf8;
+  --paper-2: #f2f2ee;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); line-height: 1.6; }
+
+/* NAV */
+nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.25rem 3rem; background: var(--paper);
+  border-bottom: 0.5px solid var(--ink-10); position: sticky; top: 0; z-index: 100;
+}
+.nav-back {
+  font-family: 'Outfit', sans-serif; font-size: 11px; font-weight: 400;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-60);
+  text-decoration: none; display: flex; align-items: center; gap: 0.5rem;
+  transition: color 0.2s;
+}
+.nav-back:hover { color: var(--ink); }
+.nav-name {
+  font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); text-decoration: none;
+}
+
+/* HERO */
+.case-hero {
+  background: var(--ink);
+  padding: 5rem 3rem 4rem;
+}
+.case-hero-inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+.case-eyebrow {
+  font-family: 'Outfit', sans-serif; font-size: 10px; font-weight: 400;
+  letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.3);
+  margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem;
+}
+.case-eyebrow::before {
+  content: ''; display: block; width: 20px; height: 0.5px; background: rgba(255,255,255,0.3);
+}
+.case-title {
+  font-family: 'Outfit', sans-serif; font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 200; line-height: 1.1; color: #fff; letter-spacing: -0.03em;
+  margin-bottom: 0.5rem;
+}
+.case-title span { font-weight: 500; }
+.case-subtitle {
+  font-size: 15px; color: rgba(255,255,255,0.4); margin-bottom: 3rem; font-weight: 300;
+}
+.case-meta-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 0; border-top: 0.5px solid rgba(255,255,255,0.08);
+  padding-top: 2rem;
+}
+.case-meta-item { padding-right: 2rem; }
+.case-meta-label {
+  font-family: 'Outfit', sans-serif; font-size: 9px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: rgba(255,255,255,0.25); margin-bottom: 0.4rem;
+}
+.case-meta-value { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.5; }
+
+/* HERO IMAGE */
+.case-hero-img {
+  max-width: 900px; margin: 3rem auto 0;
+  border-radius: 6px; overflow: hidden;
+  border: 0.5px solid rgba(255,255,255,0.08);
+}
+.case-hero-img img {
+  width: 100%; display: block;
+}
+
+/* CONTENT */
+.case-content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 5rem 3rem;
+}
+
+/* SECTIONS */
+.case-section { margin-bottom: 5rem; }
+
+.section-label {
+  font-family: 'Outfit', sans-serif; font-size: 10px; font-weight: 400;
+  letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-30);
+  margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.75rem;
+}
+.section-label::before {
+  content: ''; display: block; width: 20px; height: 0.5px; background: var(--ink-30);
+}
+
+.section-heading {
+  font-family: 'Outfit', sans-serif; font-size: 1.6rem; font-weight: 300;
+  letter-spacing: -0.025em; color: var(--ink); margin-bottom: 1.25rem; line-height: 1.2;
+}
+.section-heading strong { font-weight: 500; }
+
+.section-body {
+  font-size: 14px; color: var(--ink-60); line-height: 1.85; max-width: 660px;
+}
+
+/* OVERVIEW GRID */
+.overview-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 2.5rem;
+}
+.overview-block {
+  padding: 1.75rem; background: var(--paper-2);
+  border-radius: 4px; border: 0.5px solid var(--ink-10);
+}
+.overview-block-label {
+  font-family: 'Outfit', sans-serif; font-size: 9px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--ink-30); margin-bottom: 0.75rem;
+}
+.overview-block-text { font-size: 13px; color: var(--ink); line-height: 1.7; }
+
+/* FULL WIDTH IMAGE */
+.full-img {
+  width: 100%; border-radius: 4px;
+  border: 0.5px solid var(--ink-10); display: block; margin-top: 2rem;
+}
+
+/* IMAGE CAPTION */
+.img-caption {
+  font-size: 11px; color: var(--ink-30); letter-spacing: 0.04em;
+  margin-top: 0.6rem; font-style: italic;
+}
+
+/* CHALLENGE CALLOUTS */
+.challenge-points {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1rem; margin-top: 2rem;
+}
+.challenge-point {
+  padding: 1.5rem; border: 0.5px solid var(--ink-10);
+  border-radius: 4px; background: var(--paper);
+}
+.challenge-point-num {
+  font-family: 'Outfit', sans-serif; font-size: 1.8rem; font-weight: 200;
+  color: var(--ink-10); margin-bottom: 0.5rem; -webkit-text-stroke: 0.5px var(--ink-10);
+}
+.challenge-point-text { font-size: 13px; color: var(--ink-60); line-height: 1.6; }
+
+/* RESEARCH QUESTION */
+.research-q {
+  background: var(--ink); color: white;
+  padding: 2rem 2.5rem; border-radius: 4px; margin-top: 2rem;
+}
+.research-q-label {
+  font-family: 'Outfit', sans-serif; font-size: 9px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 0.75rem;
+}
+.research-q-text {
+  font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 300;
+  color: rgba(255,255,255,0.8); line-height: 1.5; letter-spacing: -0.01em;
+}
+
+/* VIDEO */
+.video-wrap {
+  margin-top: 2rem; border-radius: 6px; overflow: hidden;
+  border: 0.5px solid var(--ink-10); background: #000;
+}
+.video-wrap video {
+  width: 100%; display: block; max-height: 560px;
+}
+
+/* PROTOTYPE STEPS */
+.proto-steps { display: flex; flex-direction: column; gap: 4rem; margin-top: 2.5rem; }
+.proto-step {
+  display: grid; grid-template-columns: 1fr 3.5fr; gap: 3rem; align-items: center;
+  padding-top: 2.5rem; border-top: 0.5px solid var(--ink-10);
+}
+.proto-step:first-child { border-top: none; padding-top: 0; }
+.proto-step-num {
+  font-family: 'Outfit', sans-serif; font-size: 3rem; font-weight: 200;
+  color: var(--ink-10); -webkit-text-stroke: 0.5px var(--ink-10); line-height: 1;
+  margin-bottom: 0.5rem;
+}
+.proto-step-label {
+  font-family: 'Outfit', sans-serif; font-size: 9px; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--ink-30); margin-bottom: 0.4rem;
+}
+.proto-step-title {
+  font-family: 'Outfit', sans-serif; font-size: 1.2rem; font-weight: 400;
+  color: var(--ink); letter-spacing: -0.015em; margin-bottom: 0.75rem; line-height: 1.2;
+}
+.proto-step-text { font-size: 13px; color: var(--ink-60); line-height: 1.75; margin-bottom: 1rem; }
+.insight-box {
+  padding: 1rem 1.25rem; background: var(--paper-2);
+  border-left: 2px solid var(--ink-10); border-radius: 0 4px 4px 0;
+}
+.insight-label {
+  font-family: 'Outfit', sans-serif; font-size: 9px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--ink-30); margin-bottom: 0.3rem;
+}
+.insight-text { font-size: 12px; color: var(--ink-60); line-height: 1.6; }
+.proto-step-img { width: 100%; border-radius: 4px; border: 0.5px solid var(--ink-10); display: block; }
+
+/* FIGMA */
+.figma-wrap {
+  margin-top: 2rem; border-radius: 4px; overflow: hidden;
+  border: 0.5px solid var(--ink-10); background: var(--paper-2);
+}
+.figma-wrap img { width: 100%; display: block; }
+
+/* TAGS */
+.case-tags {
+  display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.5rem;
+}
+.case-tag {
+  font-size: 10px; letter-spacing: 0.07em; padding: 0.3rem 0.75rem;
+  border: 0.5px solid var(--ink-10); border-radius: 2rem; color: var(--ink-60);
+}
+
+/* BOTTOM NAV */
+.case-bottom-nav {
+  border-top: 0.5px solid var(--ink-10);
+  padding: 3rem;
+  display: flex; align-items: center; justify-content: space-between;
+  max-width: 900px; margin: 0 auto;
+}
+.back-link {
+  font-family: 'Outfit', sans-serif; font-size: 11px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--ink-60); text-decoration: none;
+  display: flex; align-items: center; gap: 0.5rem; transition: color 0.2s;
+}
+.back-link:hover { color: var(--ink); }
+.next-project {
+  display: flex; flex-direction: column; align-items: flex-end; gap: 0.25rem;
+  text-decoration: none;
+}
+.next-label {
+  font-family: 'Outfit', sans-serif; font-size: 9px; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--ink-30);
+}
+.next-title {
+  font-family: 'Outfit', sans-serif; font-size: 1rem; font-weight: 400;
+  letter-spacing: -0.01em; color: var(--ink); transition: opacity 0.2s;
+}
+.next-project:hover .next-title { opacity: 0.6; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.case-hero-inner { animation: fadeUp 0.5s ease both; }
+.case-hero-img   { animation: fadeUp 0.5s 0.1s ease both; }
+
+@media (max-width: 768px) {
+  nav { padding: 1rem 1.5rem; }
+  .case-hero { padding: 3rem 1.5rem 2.5rem; }
+  .case-meta-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .case-content { padding: 3rem 1.5rem; }
+  .overview-grid { grid-template-columns: 1fr; gap: 1rem; }
+  .challenge-points { grid-template-columns: 1fr; }
+  .proto-step { grid-template-columns: 1fr; }
+  .case-bottom-nav { padding: 2rem 1.5rem; flex-direction: column; gap: 1.5rem; align-items: flex-start; }
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+  <a class="nav-back" href="index.html">← Back</a>
+  <a class="nav-name" href="index.html">Zachary Lu-Ming Fan</a>
+</nav>
+
+<!-- HERO -->
+<div class="case-hero">
+  <div class="case-hero-inner">
+    <div class="case-eyebrow">Case Study · 01</div>
+    <h1 class="case-title">The <span>Pre-approved</span><br>Cooling Pilot</h1>
+    <p class="case-subtitle">City of Vancouver — Passive Cooling Infrastructure Design</p>
+    <div class="case-meta-grid">
+      <div class="case-meta-item">
+        <div class="case-meta-label">Client</div>
+        <div class="case-meta-value">City of Vancouver</div>
+      </div>
+      <div class="case-meta-item">
+        <div class="case-meta-label">My Role</div>
+        <div class="case-meta-value">UI/UX Designer &amp; Sole Prototyper</div>
+      </div>
+      <div class="case-meta-item">
+        <div class="case-meta-label">Team</div>
+        <div class="case-meta-value">+ 4 UX Researchers</div>
+      </div>
+      <div class="case-meta-item">
+        <div class="case-meta-label">Year</div>
+        <div class="case-meta-value">2026</div>
+      </div>
+    </div>
+  </div>
+  <div class="case-hero-img" style="max-width:900px;margin:3rem auto 0;padding:0 3rem;">
+    <img src="COV Slide 1 Opening slide.png" alt="The Pre-approved Cooling Pilot">
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="case-content">
+
+  <!-- OVERVIEW -->
+  <div class="case-section">
+    <div class="section-label">Overview</div>
+    <h2 class="section-heading">Vancouver encourages passive cooling.<br><strong>Its own website makes it nearly impossible.</strong></h2>
+    <p class="section-body">The City of Vancouver actively promotes passive cooling — shade structures, tree planting, and other low-impact interventions to reduce urban heat. But the permit process required to implement them is fragmented, buried in technical language, and routed through multiple departments. Community organizations face wait times of 3–6 months just to get approval for straightforward, low-risk projects.</p>
+    <div class="overview-grid">
+      <div class="overview-block">
+        <div class="overview-block-label">The Brief</div>
+        <div class="overview-block-text">Design a solution that helps community organizations navigate the City of Vancouver's permit process for passive cooling projects — reducing friction, wait times, and confusion.</div>
+      </div>
+      <div class="overview-block">
+        <div class="overview-block-label">The Solution</div>
+        <div class="overview-block-text">A new pre-approved permit feature integrated directly into the existing City of Vancouver website — allowing organizations to bypass the full permit process for pre-vetted, low-risk passive cooling projects.</div>
+      </div>
+    </div>
+    <div class="case-tags">
+      <span class="case-tag">UI Design</span>
+      <span class="case-tag">UX Design</span>
+      <span class="case-tag">UX Research</span>
+      <span class="case-tag">Prototyping</span>
+      <span class="case-tag">Figma</span>
+      <span class="case-tag">Service Design</span>
+      <span class="case-tag">Information Architecture</span>
+    </div>
+  </div>
+
+  <!-- THE CHALLENGE -->
+  <div class="case-section">
+    <div class="section-label">The Challenge</div>
+    <h2 class="section-heading">Community organizations couldn't determine<br><strong>what was even allowed.</strong></h2>
+    <p class="section-body">Through research, we identified that the core problem wasn't just slow bureaucracy — it was a fundamental lack of clarity at every stage of the process. Organizations couldn't determine what was permitted, who needed to approve it, or which solutions the City would accept.</p>
+    <div class="challenge-points">
+      <div class="challenge-point">
+        <div class="challenge-point-num">01</div>
+        <div class="challenge-point-text">What is permitted for their specific property and location</div>
+      </div>
+      <div class="challenge-point">
+        <div class="challenge-point-num">02</div>
+        <div class="challenge-point-text">Who must approve the intervention and which department handles it</div>
+      </div>
+      <div class="challenge-point">
+        <div class="challenge-point-num">03</div>
+        <div class="challenge-point-text">Which cooling solutions are acceptable to the City</div>
+      </div>
+    </div>
+    <div class="research-q">
+      <div class="research-q-label">Research Question</div>
+      <div class="research-q-text">What barriers do community-serving organizations encounter when implementing small-scale, low-risk passive cooling projects on properties they own in Vancouver?</div>
+    </div>
+    <img class="full-img" src="COV Slide 4 Current Permitting Journey.png" alt="Current Permitting Journey Map">
+    <div class="img-caption">Current permitting journey — 5 phases, months of wait time, and friction at every step</div>
+  </div>
+
+  <!-- THE PROTOTYPE -->
+  <div class="case-section">
+    <div class="section-label">Prototype Walkthrough</div>
+    <h2 class="section-heading">A new feature embedded into<br><strong>the existing City of Vancouver website.</strong></h2>
+    <p class="section-body">Rather than building a separate platform, the solution integrates directly into vancouver.ca — meeting users where they already go. The prototype demonstrates three key steps: discovering the feature, checking pre-approval status by address, and accessing project-specific guidance.</p>
+    
+      <!-- <div class="video-wrap">
+        <iframe width="100%" height="500" src="https://www.youtube.com/embed/6tB-YWvu--Q?si=wEuU32ma7LL2cwFe&controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div> -->
+
+      <div class="video-wrap">
+        <video controls width="100%" style="border-radius: 6px; display: block;">
+          <source src="passive_cooling_prototype.mp4" type="video/mp4">
+        </video>
+      </div>
+
+    <div class="img-caption" style="margin-top:0.75rem;">Interactive prototype — built and prototyped in Figma</div>
+
+    <div class="proto-steps">
+      <div class="proto-step">
+        <div>
+          <div class="proto-step-num">01</div>
+          <div class="proto-step-label">Entry Point</div>
+          <div class="proto-step-title">A new button on the City of Vancouver homepage</div>
+          <p class="proto-step-text">A clear entry point added to the City homepage allows users to quickly check whether their passive cooling project requires a permit — simplifying the discovery phase immediately.</p>
+          <div class="insight-box">
+            <div class="insight-label">Research Insight</div>
+            <div class="insight-text">The website contains dense information spread across multiple pages, making it difficult to quickly understand what applies to a specific project.</div>
+          </div>
+        </div>
+        <img class="proto-step-img" src="COV Slide 5 Prototype Landing Page.png" alt="Prototype Step 1 - Entry Point">
+      </div>
+
+      <div class="proto-step">
+        <div>
+          <div class="proto-step-num">02</div>
+          <div class="proto-step-label">Permit Discovery</div>
+          <div class="proto-step-title">Check pre-approval status by address</div>
+          <p class="proto-step-text">The pre-approved cooling permits page allows users to enter their address and instantly see which passive cooling projects are already approved for their specific location — no enquiry submission required.</p>
+          <div class="insight-box">
+            <div class="insight-label">Research Insight</div>
+            <div class="insight-text">When requirements are unclear, applicants must submit a Development Permit enquiry or consult City staff — making it difficult to determine whether regulations apply before starting an application.</div>
+          </div>
+        </div>
+        <img class="proto-step-img" src="COV Slide 6 Prototype Permit Pre-approval Page.png" alt="Prototype Step 2 - Permit Discovery">
+      </div>
+
+      <div class="proto-step">
+        <div>
+          <div class="proto-step-num">03</div>
+          <div class="proto-step-label">Project Details</div>
+          <div class="proto-step-title">Location-specific guidance, clearly explained</div>
+          <p class="proto-step-text">After entering an address, the system displays the relevant cooling project and clearly states whether a permit is required — with plain-language explanations of why, and what the next steps are.</p>
+          <div class="insight-box">
+            <div class="insight-label">Research Insight</div>
+            <div class="insight-text">Urban planning regulations depend on property zoning, which varies by location. Permit requirements therefore depend on the specific site of the project.</div>
+          </div>
+        </div>
+        <img class="proto-step-img" src="COV Slide 7 Prototype 8.png" alt="Prototype Step 3 - Project Details">
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DESIGN PROCESS -->
+  <div class="case-section">
+    <div class="section-label">Design Process</div>
+    <h2 class="section-heading">Building the feature inside<br><strong>the City of Vancouver's existing UI system.</strong></h2>
+    <p class="section-body">As the sole designer, I was responsible for building all UI components in Figma — replicating and extending the City of Vancouver's existing design language to ensure the new feature felt native to the platform. This included navigation elements, directory components, map interfaces, and location information panels.</p>
+    <div class="figma-wrap">
+      <img src="COV Prototype Components on FIGMA.png" alt="Figma component library">
+    </div>
+    <div class="img-caption">Component library built in Figma — replicating the City of Vancouver's existing UI patterns</div>
+  </div>
+
+</div>
+
+<!-- BOTTOM NAV -->
+<div class="case-bottom-nav">
+  <a class="back-link" href="index.html">← All projects</a>
+  <a class="next-project" href="ctr_case_study.html">
+    <span class="next-label">Next project</span>
+    <span class="next-title">Computerized Transaction Record →</span>
+  </a>
+</div>
+
+</body>
+</html>

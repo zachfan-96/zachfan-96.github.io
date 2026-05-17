@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HomeScope — Zachary Lu-Ming Fan</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ink: #111110;
+  --ink-60: #666662;
+  --ink-30: #b0b0aa;
+  --ink-10: #e8e8e4;
+  --paper: #fafaf8;
+  --paper-2: #f2f2ee;
+  --accent: #e8a04a;
+  --accent-soft: #fdf3e6;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); line-height: 1.6; }
+
+nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.25rem 3rem; background: var(--paper);
+  border-bottom: 0.5px solid var(--ink-10); position: sticky; top: 0; z-index: 100;
+}
+.nav-back {
+  font-family: 'Outfit', sans-serif; font-size: 11px; font-weight: 400;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-60);
+  text-decoration: none; display: flex; align-items: center; gap: 0.5rem; transition: color 0.2s;
+}
+.nav-back:hover { color: var(--ink); }
+.nav-name {
+  font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); text-decoration: none;
+}
+
+/* HERO */
+.case-hero { background: var(--ink); padding: 5rem 3rem 4rem; }
+.case-hero-inner { max-width: 900px; margin: 0 auto; }
+.case-eyebrow {
+  font-family: 'Outfit', sans-serif; font-size: 10px; font-weight: 400;
+  letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.3);
+  margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem;
+}
+.case-eyebrow::before { content: ''; display: block; width: 20px; height: 0.5px; background: rgba(255,255,255,0.3); }
+.case-title {
+  font-family: 'Outfit', sans-serif; font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 200; line-height: 1.1; color: #fff; letter-spacing: -0.03em; margin-bottom: 0.5rem;
+}
+.case-title span { font-weight: 500; }
+.case-subtitle { font-size: 15px; color: rgba(255,255,255,0.4); margin-bottom: 3rem; font-weight: 300; }
+.case-meta-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  border-top: 0.5px solid rgba(255,255,255,0.08); padding-top: 2rem;
+}
+.case-meta-item { padding-right: 2rem; }
+.case-meta-label {
+  font-family: 'Outfit', sans-serif; font-size: 9px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: rgba(255,255,255,0.25); margin-bottom: 0.4rem;
+}
+.case-meta-value { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.5; }
+
+.hero-img-wrap { max-width: 900px; margin: 3rem auto 0; padding: 0 3rem; }
+.hero-img-wrap img { width: 100%; display: block; border-radius: 6px; }
+
+/* CONTENT */
+.case-content { max-width: 900px; margin: 0 auto; padding: 5rem 3rem; }
+.case-section { margin-bottom: 5rem; }
+
+.section-label {
+  font-family: 'Outfit', sans-serif; font-size: 10px; font-weight: 400;
+  letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-30);
+  margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.75rem;
+}
+.section-label::before { content: ''; display: block; width: 20px; height: 0.5px; background: var(--ink-30); }
+
+.section-heading {
+  font-family: 'Outfit', sans-serif; font-size: 1.6rem; font-weight: 300;
+  letter-spacing: -0.025em; color: var(--ink); margin-bottom: 1.25rem; line-height: 1.2;
+}
+.section-heading strong { font-weight: 500; }
+.section-body { font-size: 14px; color: var(--ink-60); line-height: 1.85; max-width: 660px; }
+.section-body + .section-body { margin-top: 1rem; }
+
+/* TWO COL */
+.two-col {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2.5rem;
+}
+.info-block {
+  padding: 1.75rem; background: var(--paper-2); border-radius: 4px; border: 0.5px solid var(--ink-10);
+}
+.info-block-label {
+  font-family: 'Outfit', sans-serif; font-size: 9px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--ink-30); margin-bottom: 0.75rem;
+}
+.info-block-text { font-size: 13px; color: var(--ink); line-height: 1.7; }
+
+/* TAGS */
+.case-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.5rem; }
+.case-tag {
+  font-size: 10px; letter-spacing: 0.07em; padding: 0.3rem 0.75rem;
+  border: 0.5px solid var(--ink-10); border-radius: 2rem; color: var(--ink-60);
+}
+
+/* USER FLOW */
+.flow-img {
+  width: 100%; max-width: 500px; display: block; margin: 2rem auto;
+  border-radius: 4px; border: 0.5px solid var(--ink-10);
+}
+
+/* WIREFRAMES GRID */
+.wf-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 2rem;
+}
+.wf-card {
+  border: 0.5px solid var(--ink-10); border-radius: 4px; overflow: hidden; background: var(--paper-2);
+}
+.wf-card img { width: 100%; display: block; }
+.wf-card-label {
+  padding: 0.5rem 0.75rem;
+  font-family: 'Outfit', sans-serif; font-size: 9px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--ink-30); border-top: 0.5px solid var(--ink-10);
+}
+
+/* FEATURE ROWS */
+.feature-rows { display: flex; flex-direction: column; gap: 4rem; margin-top: 2.5rem; }
+.feature-row {
+  display: grid; grid-template-columns: 1fr 220px; gap: 3rem; align-items: start;
+  padding-top: 2.5rem; border-top: 0.5px solid var(--ink-10);
+}
+.feature-row:first-child { border-top: none; padding-top: 0; }
+.feature-num {
+  font-family: 'Outfit', sans-serif; font-size: 3rem; font-weight: 200;
+  color: var(--ink-10); -webkit-text-stroke: 0.5px var(--ink-10); line-height: 1; margin-bottom: 0.5rem;
+}
+.feature-label {
+  font-family: 'Outfit', sans-serif; font-size: 9px; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--ink-30); margin-bottom: 0.4rem;
+}
+.feature-title {
+  font-family: 'Outfit', sans-serif; font-size: 1.2rem; font-weight: 400;
+  color: var(--ink); letter-spacing: -0.015em; margin-bottom: 0.75rem; line-height: 1.2;
+}
+.feature-text { font-size: 13px; color: var(--ink-60); line-height: 1.75; }
+
+.feature-img {
+  width: 100%; border-radius: 12px; display: block;
+  border: 0.5px solid var(--ink-10);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+/* FINAL DESIGN */
+.full-img { width: 100%; border-radius: 4px; border: 0.5px solid var(--ink-10); display: block; margin-top: 2rem; }
+.img-caption { font-size: 11px; color: var(--ink-30); letter-spacing: 0.04em; margin-top: 0.6rem; font-style: italic; }
+
+/* BOTTOM NAV */
+.case-bottom-nav {
+  border-top: 0.5px solid var(--ink-10); padding: 3rem;
+  display: flex; align-items: center; justify-content: space-between;
+  max-width: 900px; margin: 0 auto;
+}
+.back-link {
+  font-family: 'Outfit', sans-serif; font-size: 11px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--ink-60); text-decoration: none;
+  display: flex; align-items: center; gap: 0.5rem; transition: color 0.2s;
+}
+.back-link:hover { color: var(--ink); }
+.prev-project { display: flex; flex-direction: column; gap: 0.25rem; text-decoration: none; }
+.prev-label {
+  font-family: 'Outfit', sans-serif; font-size: 9px; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--ink-30);
+}
+.prev-title {
+  font-family: 'Outfit', sans-serif; font-size: 1rem; font-weight: 400;
+  letter-spacing: -0.01em; color: var(--ink); transition: opacity 0.2s;
+}
+.prev-project:hover .prev-title { opacity: 0.6; }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+.case-hero-inner { animation: fadeUp 0.5s ease both; }
+
+@media (max-width: 768px) {
+  nav { padding: 1rem 1.5rem; }
+  .case-hero { padding: 3rem 1.5rem 2.5rem; }
+  .case-meta-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .case-content { padding: 3rem 1.5rem; }
+  .two-col { grid-template-columns: 1fr; }
+  .wf-grid { grid-template-columns: repeat(2, 1fr); }
+  .feature-row { grid-template-columns: 1fr; }
+  .feature-img { max-width: 280px; margin: 0 auto; }
+  .case-bottom-nav { padding: 2rem 1.5rem; flex-direction: column; gap: 1.5rem; align-items: flex-start; }
+}
+
+.gif-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 1.5rem; }
+.gif-card { border: 0.5px solid var(--ink-10); border-radius: 12px; overflow: hidden; background: var(--paper-2); }
+.gif-img { width: 100%; display: block; }
+.gif-card-label { padding: 0.6rem 0.75rem; font-family: 'Outfit', sans-serif; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-30); border-top: 0.5px solid var(--ink-10); }
+@media (max-width: 768px) { .gif-grid { grid-template-columns: 1fr; } }
+
+</style>
+</head>
+
+<body>
+
+<nav>
+  <a class="nav-back" href="index.html">← Back</a>
+  <a class="nav-name" href="index.html">Zachary Lu-Ming Fan</a>
+</nav>
+
+<!-- HERO -->
+<div class="case-hero">
+  <div class="case-hero-inner">
+    <div class="case-eyebrow">Case Study · 03</div>
+    <h1 class="case-title">Home<span>Scope</span></h1>
+    <p class="case-subtitle">Simon Fraser University — Mobile Application Design</p>
+    <div class="case-meta-grid">
+      <div class="case-meta-item">
+        <div class="case-meta-label">Client</div>
+        <div class="case-meta-value">Simon Fraser University</div>
+      </div>
+      <div class="case-meta-item">
+        <div class="case-meta-label">My Role</div>
+        <div class="case-meta-value">UI/UX Designer</div>
+      </div>
+      <div class="case-meta-item">
+        <div class="case-meta-label">Platform</div>
+        <div class="case-meta-value">iOS Mobile App</div>
+      </div>
+      <div class="case-meta-item">
+        <div class="case-meta-label">Year</div>
+        <div class="case-meta-value">2024</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-img-wrap">
+    <img src="HomeScope 5 Screens.png" alt="HomeScope App Overview" class="">
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="case-content">
+
+  <!-- PROBLEM & SOLUTION -->
+  <div class="case-section">
+    <div class="section-label">Problem &amp; Solution</div>
+    <h2 class="section-heading">Navigating a new city's housing market<br><strong>is hard enough without a roadmap.</strong></h2>
+    <p class="section-body">User research revealed a consistent pain point among international students arriving in Canada: finding reasonable, affordable housing is one of the biggest obstacles they face. Without local knowledge, reliable resources, or familiarity with the market, the process is overwhelming before it even begins.</p>
+    <p class="section-body">HomeScope was designed to change that. Built around the specific needs of international students, the app simplifies the housing search from the ground up — offering a smoother transition and a more secure path to finding a home.</p>
+    <div class="two-col">
+      <div class="info-block">
+        <div class="info-block-label">The Problem</div>
+        <div class="info-block-text">International students face a housing market they don't know, with few localized resources, limited awareness of which neighbourhoods are safe or practical, and real exposure to housing scams targeting newcomers.</div>
+      </div>
+      <div class="info-block">
+        <div class="info-block-label">The Solution</div>
+        <div class="info-block-text">A user-focused mobile app that delivers AI-powered recommendations, neighbourhood insights, and BC-specific renter resources — designed to give international students the best possible shot at securing a home they feel safe in.</div>
+      </div>
+    </div>
+    <div class="case-tags">
+      <span class="case-tag">UI Design</span>
+      <span class="case-tag">UX Design</span>
+      <span class="case-tag">UX Research</span>
+      <span class="case-tag">Prototyping</span>
+      <span class="case-tag">Figma</span>
+      <span class="case-tag">Mobile UX</span>
+      <span class="case-tag">Product Design</span>
+      <span class="case-tag">ProtoPie</span>
+    </div>
+  </div>
+
+  <!-- WHY HOMESCOPE -->
+  <div class="case-section">
+    <div class="section-label">Why HomeScope</div>
+    <h2 class="section-heading">More than a listings app —<br><strong>a platform built around the user.</strong></h2>
+    <p class="section-body">HomeScope keeps user needs at the centre of every design decision. While other housing platforms offer basic listings, HomeScope delivers an experience tailored to the unique challenges international students face — combining transparency, safety, and genuine support into a single, intuitive tool.</p>
+    <div class="two-col" style="margin-top:2rem;">
+      <div class="info-block">
+        <div class="info-block-label">Competitive Edge</div>
+        <div class="info-block-text">Rather than simply presenting listings, HomeScope provides users with a complete picture of the living experience — safety ratings, transit options, neighbourhood culture, peer reviews, and direct host contact — all within a single flow.</div>
+      </div>
+      <div class="info-block">
+        <div class="info-block-label">User Empathy</div>
+        <div class="info-block-text">HomeScope directly addresses the anxieties of arriving somewhere new: personalized recommendations based on your institution, transparent neighbourhood data, and built-in renter's resources so users know their rights before signing anything.</div>
+      </div>
+      <div class="info-block">
+        <div class="info-block-label">The Bigger Picture</div>
+        <div class="info-block-text">HomeScope isn't just a tool — it's a support system for students building a new life in unfamiliar territory. By prioritizing accessibility, inclusivity, and student-specific needs, the app aims to be a genuine lifeline for newcomers.</div>
+      </div>
+      <div class="info-block">
+        <div class="info-block-label">Design Approach</div>
+        <div class="info-block-text">User empathy drove every feature decision. From the AI recommendation engine to the BC-specific renter resources, every element exists because real user research identified it as a gap that existing platforms failed to fill.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- USER FLOW -->
+  <div class="case-section">
+    <div class="section-label">User Flow</div>
+    <h2 class="section-heading">From sign-up to<br><strong>contacting a host.</strong></h2>
+    <p class="section-body">The user flow was mapped early to ensure the path from onboarding through to finding and contacting a host was as direct as possible. New users complete a personal information form and set their housing preferences before landing on their personalized recommendations page.</p>
+    <img class="flow-img" src="HomeScope User Flow.jpg" alt="HomeScope User Flow Diagram">
+    <div class="img-caption">Full user flow — from Welcome/Sign-up through to Contact Host</div>
+  </div>
+
+  <!-- WIREFRAMES -->
+  <div class="case-section">
+    <div class="section-label">Wireframes</div>
+    <h2 class="section-heading">Sketching the structure<br><strong>before building the UI.</strong></h2>
+    <p class="section-body">Hand-drawn wireframes were used to explore the core screens early in the process — mapping layouts for sign-in, profile setup, listings, search, listing details, favourites, and the renter resources page before moving into high-fidelity design.</p>
+    <div class="wf-grid">
+      <div class="wf-card"><img src="HomeScope App WF 1.jpg" alt="Wireframe: Sign In" class="wf-img"><div class="wf-card-label">Sign In</div></div>
+      <div class="wf-card"><img src="HomeScope App WF 2.jpg" alt="Wireframe: Profile Setup" class="wf-img"><div class="wf-card-label">Profile Setup</div></div>
+      <div class="wf-card"><img src="HomeScope App WF 3.jpg" alt="Wireframe: Listing Detail" class="wf-img"><div class="wf-card-label">Listing Detail</div></div>
+      <div class="wf-card"><img src="HomeScope App WF 4.jpg" alt="Wireframe: Favourites" class="wf-img"><div class="wf-card-label">Favourites</div></div>
+      <div class="wf-card"><img src="HomeScope App WF 5.jpg" alt="Wireframe: Search" class="wf-img"><div class="wf-card-label">Search</div></div>
+      <div class="wf-card"><img src="HomeScope App WF 6.jpg" alt="Wireframe: Search Results" class="wf-img"><div class="wf-card-label">Search Results</div></div>
+      <div class="wf-card"><img src="HomeScope App WF 7.jpg" alt="Wireframe: Renter Resources" class="wf-img"><div class="wf-card-label">Renter Resources</div></div>
+    </div>
+  </div>
+
+  <!-- VISUAL DESIGN -->
+  <div class="case-section">
+    <div class="section-label">Visual Design</div>
+    <h2 class="section-heading">From sketch to system<br><strong>built in Figma.</strong></h2>
+    <p class="section-body">Before moving into prototyping, a design system was established in Figma — defining the colour palette, typography, and component styles that carry through the entire app. The warm orange accent, clean sans-serif type, and consistent card layouts work together to create an experience that feels approachable and trustworthy for international students navigating an unfamiliar housing market.</p>
+    <img src="HomeScope Figma.png" alt="HomeScope Final Design - Five Screen Overview" class="full-img">
+  </div>
+
+  <!-- KEY FEATURES -->
+  <div class="case-section">
+    <div class="section-label">Key Features</div>
+    <h2 class="section-heading">Designed around<br><strong>what students actually need.</strong></h2>
+
+    <div class="feature-rows">
+
+      <div class="feature-row">
+        <div>
+          <div class="feature-num">01</div>
+          <div class="feature-label">Onboarding</div>
+          <div class="feature-title">Sign In &amp; Account Creation</div>
+          <p class="feature-text">The welcome screen offers a clean sign-in flow with multiple entry points — email, phone number, or Google account — keeping the barrier to entry low for students arriving from any background.</p>
+        </div>
+        <img src="HomeScope App SS 1.png" alt="HomeScope Sign In Screen" class="feature-img">
+      </div>
+
+      <div class="feature-row">
+        <div>
+          <div class="feature-num">02</div>
+          <div class="feature-label">Personalization</div>
+          <div class="feature-title">Profile &amp; Preference Setup</div>
+          <p class="feature-text">The profile setup captures the details that matter: institution, transportation preference, housing type, and budget. This input feeds directly into the AI recommendation engine, ensuring the results shown are genuinely relevant to each user's situation — not just a generic list.</p>
+        </div>
+        <img src="HomeScope App SS 2.png" alt="HomeScope Profile Setup Screen" class="feature-img">
+      </div>
+
+      <div class="feature-row">
+        <div>
+          <div class="feature-num">03</div>
+          <div class="feature-label">Core Feature</div>
+          <div class="feature-title">AI-Generated Recommendations</div>
+          <p class="feature-text">The homepage delivers a personalized list of housing recommendations generated from the user's profile preferences. Listings are sorted by proximity to the user's institution, from most to least expensive, with the best-matched options surfaced first. A refresh button allows users to regenerate results if the AI needs recalibrating.</p>
+        </div>
+        <img src="HomeScope App SS 3.png" alt="HomeScope AI Recommendations Feed" class="feature-img">
+      </div>
+
+      <div class="feature-row">
+        <div>
+          <div class="feature-num">04</div>
+          <div class="feature-label">Exploration</div>
+          <div class="feature-title">Search Function</div>
+          <p class="feature-text">For users who want to explore beyond their AI-generated results, the search function opens the full listings catalogue. A clear inline warning reminds users that results outside their preferences may not match their criteria — keeping them informed without blocking exploration.</p>
+        </div>
+        <img src="HomeScope App SS 4.png" alt="HomeScope Search Screen" class="feature-img">
+      </div>
+
+      <div class="feature-row">
+        <div>
+          <div class="feature-num">05</div>
+          <div class="feature-label">Neighbourhood Insights</div>
+          <div class="feature-title">Listing Detail — Safety, Transit &amp; Amenities</div>
+          <p class="feature-text">Tapping a listing reveals far more than just the price and address. Users see a safety rating, nearby transit routes, amenity icons, and a neighbourhood description — everything needed to understand the actual living experience of a property before committing to a viewing.</p>
+        </div>
+        <img src="HomeScope App SS 5.png" alt="HomeScope Listing Detail - Neighbourhood Insights" class="feature-img">
+      </div>
+
+      <div class="feature-row">
+        <div>
+          <div class="feature-num">06</div>
+          <div class="feature-label">Community &amp; Trust</div>
+          <div class="feature-title">Reviews &amp; BC Renter Resources</div>
+          <p class="feature-text">Peer reviews from other students provide authentic, ground-level perspectives on what it's actually like to live in an area. Below reviews, a dedicated Resources section links to BC-specific tenancy information — arming users with the knowledge they need to navigate the rental process safely and confidently.</p>
+        </div>
+        <img src="HomeScope App SS 7.png" alt="HomeScope Reviews and Resources" class="feature-img">
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FINAL DESIGN -->
+  <div class="case-section">
+    <div class="section-label">Final Design</div>
+    <h2 class="section-heading">The complete<br><strong>HomeScope experience.</strong></h2>
+    <p class="section-body">Five key screens showing the full user journey — from welcome and sign-in, through AI-powered recommendations, into listing detail with neighbourhood insights, and finally to the Contact Host screen.</p>
+    <img src="HomeScope 5 Screens.png" alt="HomeScope Final Design - Five Screen Overview" class="full-img">
+    
+    <div class="section-label" style="margin-top:2.5rem;">App Interactions</div>
+    <p class="section-body" style="margin-bottom:1.5rem;">Three live interaction demos from the prototype — showing the profile setup flow, neighbourhood insights on a listing, and peer reviews with BC renter resources.</p>
+    <div class="gif-grid">
+      <div class="gif-card">
+        <img src="GIF_HomeScope_App_Demo_1.gif" alt="Profile Setup Interaction" class="gif-img">
+        <div class="gif-card-label">Profile Setup — Institution Dropdown</div>
+        </div>
+        <div class="gif-card">
+        <img src="GIF_HomeScope_App_Demo_2.gif" alt="Neighbourhood Insights Interaction" class="gif-img">
+        <div class="gif-card-label">Listing Detail — Neighbourhood Insights</div>
+        </div>
+        <div class="gif-card">
+        <img src="GIF_HomeScope_App_Demo_3.gif" alt="Reviews and Resources Interaction" class="gif-img">
+        <div class="gif-card-label">Listing Detail — Reviews &amp; Resources</div>
+        </div>
+      </div>
+
+    <div class="img-caption">Prototype built and tested in Figma and ProtoPie</div>
+  </div>
+
+</div>
+
+<!-- BOTTOM NAV -->
+<div class="case-bottom-nav">
+  <a class="back-link" href="index.html">← All projects</a>
+  <a class="prev-project" href="ctr_case_study.html">
+    <span class="prev-label">Previous project</span>
+    <span class="prev-title">← Computerized Transaction Record</span>
+  </a>
+</div>
+
+</body>
+
+</html>
