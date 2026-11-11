@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-A static portfolio site for Zachary Lu-Ming Fan (UI/UX designer). Plain HTML/CSS, zero JavaScript, no build tooling, no package manager. Deployed as-is via GitHub Pages — pushing to `main` on `origin` (`https://github.com/zachfan-96/zachfan-96.github.io`) publishes directly to `https://zachfan-96.github.io/`, with no build/CI step in between.
+A static portfolio site for Zachary Lu-Ming Fan (Product & UX/UI designer). Plain HTML/CSS, zero JavaScript, no build tooling, no package manager. Deployed as-is via GitHub Pages — pushing to `main` on `origin` (`https://github.com/zachfan-96/zachfan-96.github.io`) publishes directly to `https://zachfan-96.github.io/`, with no build/CI step in between.
 
 ## Running locally
 
