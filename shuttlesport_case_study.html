@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shuttlesport Badminton Academy — Zachary Lu-Ming Fan</title>
+<meta name="description" content="Shuttlesport Badminton Academy — redesigning the class booking experience for a local badminton club to reduce friction and improve member registration.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Shuttlesport Badminton Academy — Zachary Lu-Ming Fan">
+<meta property="og:description" content="Redesigning the class booking experience for a local badminton club to reduce friction and improve member registration.">
+<meta property="og:url" content="https://zachfan-96.github.io/shuttlesport_case_study.html">
+<meta property="og:image" content="https://zachfan-96.github.io/portfolio-shuttlesport.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Shuttlesport Badminton Academy — Zachary Lu-Ming Fan">
+<meta name="twitter:description" content="Redesigning the class booking experience for a local badminton club.">
+<meta name="twitter:image" content="https://zachfan-96.github.io/portfolio-shuttlesport.png">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+
+<style>
+/* HERO IMAGE */
+.case-hero-img {
+  max-width: 900px; margin: 3rem auto 0; padding: 0 3rem;
+  border-radius: 6px; overflow: hidden;
+  border: 0.5px solid rgba(255,255,255,0.08);
+}
+.case-hero-img img {
+  width: 100%; display: block;
+}
+.case-hero-img { animation: fadeUp 0.5s 0.1s ease both; }
+
+/* CONTENT */
+.case-content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 5rem 3rem;
+}
+
+/* SECTIONS */
+.case-section { margin-bottom: 5rem; }
+
+/* OVERVIEW GRID */
+.overview-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 2.5rem;
+}
+
+/* RESEARCH QUESTION */
+.research-q {
+  background: var(--ink); color: white;
+  padding: 2rem 2.5rem; border-radius: 4px; margin-top: 2rem;
+}
+.research-q-label {
+  font-family: 'Outfit', sans-serif; font-size: 9px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 0.75rem;
+}
+.research-q-text {
+  font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 300;
+  color: rgba(255,255,255,0.8); line-height: 1.5; letter-spacing: -0.01em;
+}
+
+/* CHALLENGE CALLOUTS */
+.challenge-points {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1rem; margin-top: 2rem;
+}
+.challenge-point {
+  padding: 1.5rem; border: 0.5px solid var(--ink-10);
+  border-radius: 4px; background: var(--paper);
+}
+.challenge-point-num {
+  font-family: 'Outfit', sans-serif; font-size: 1.8rem; font-weight: 200;
+  color: var(--ink-10); margin-bottom: 0.5rem; -webkit-text-stroke: 0.5px var(--ink-10);
+}
+.challenge-point-text { font-size: 13px; color: var(--ink-60); line-height: 1.6; }
+
+/* STAT ROW */
+.stat-row {
+  display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem;
+}
+.stat-pill {
+  display: flex; flex-direction: column; align-items: flex-start;
+  padding: 1.25rem 1.5rem; border: 0.5px solid var(--ink-10);
+  border-radius: 4px; background: var(--paper); flex: 1; min-width: 140px;
+}
+.stat-pill-num {
+  font-family: 'Outfit', sans-serif; font-size: 2rem; font-weight: 200;
+  color: var(--ink); line-height: 1; margin-bottom: 0.4rem;
+  -webkit-text-stroke: 0.5px var(--ink-30);
+}
+.stat-pill-label {
+  font-size: 12px; color: var(--ink-60); line-height: 1.4;
+}
+
+/* IMAGE GRID */
+.component-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem;
+}
+.component-card img,
+.component-card-wide img {
+  width: 100%; display: block; border-radius: 4px;
+  border: 0.5px solid var(--ink-10);
+}
+.component-card-wide {
+  grid-column: 1 / -1;
+}
+.img-caption {
+  font-size: 11px; color: var(--ink-30); margin-top: 0.5rem;
+  font-family: 'Outfit', sans-serif; letter-spacing: 0.04em;
+}
+
+/* SINGLE IMAGE */
+.full-img {
+  margin-top: 2rem;
+}
+.full-img img {
+  width: 100%; display: block; border-radius: 4px;
+  border: 0.5px solid var(--ink-10);
+}
+
+/* PROTOTYPE STEPS (final design walkthrough) */
+.proto-steps { display: flex; flex-direction: column; gap: 4rem; margin-top: 2.5rem; }
+.proto-step {
+  display: grid; grid-template-columns: 1.5fr 3fr; gap: 2.5rem; align-items: center;
+  padding-top: 2.5rem; border-top: 0.5px solid var(--ink-10);
+}
+.proto-step:first-child { border-top: none; padding-top: 0; }
+.proto-step-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+.proto-step-num {
+  font-family: 'Outfit', sans-serif; font-size: 3rem; font-weight: 200;
+  color: var(--ink-10); -webkit-text-stroke: 0.5px var(--ink-10); line-height: 1;
+  margin-bottom: 0.5rem;
+}
+.proto-step-label {
+  font-family: 'Outfit', sans-serif; font-size: 9px; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--ink-30); margin-bottom: 0.4rem;
+}
+.proto-step-title {
+  font-family: 'Outfit', sans-serif; font-size: 1.2rem; font-weight: 400;
+  color: var(--ink); letter-spacing: -0.015em; margin-bottom: 0.75rem; line-height: 1.2;
+}
+.proto-step-text { font-size: 13px; color: var(--ink-60); line-height: 1.75; margin-bottom: 1rem; }
+.insight-box {
+  padding: 1rem 1.25rem; background: var(--paper-2);
+  border-left: 2px solid var(--ink-10); border-radius: 0 4px 4px 0;
+}
+.insight-label {
+  font-family: 'Outfit', sans-serif; font-size: 9px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--ink-30); margin-bottom: 0.3rem;
+}
+.insight-text { font-size: 12px; color: var(--ink-60); line-height: 1.6; }
+.proto-step-img { width: 100%; border-radius: 4px; border: 0.5px solid var(--ink-10); display: block; }
+
+/* WORKSHOP GRID — 4-col for workshop images */
+.workshop-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem;
+}
+.workshop-grid .component-card img {
+  width: 100%; display: block; border-radius: 4px;
+  border: 0.5px solid var(--ink-10);
+}
+
+@media (max-width: 768px) {
+  .case-hero-img { padding: 0 1.5rem; }
+  .overview-grid { grid-template-columns: 1fr; gap: 1rem; }
+  .challenge-points { grid-template-columns: 1fr; }
+  .component-grid { grid-template-columns: 1fr; }
+  .workshop-grid { grid-template-columns: 1fr; }
+  .proto-step { grid-template-columns: 1fr; }
+  .proto-step-grid { grid-template-columns: 1fr; }
+  .stat-row { flex-direction: column; }
+}
+
+/* BOTTOM NAV */
+.prev-project { display: flex; flex-direction: column; gap: 0.25rem; text-decoration: none; }
+.prev-label {
+  font-family: 'Outfit', sans-serif; font-size: 9px; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--ink-30);
+}
+.prev-title {
+  font-family: 'Outfit', sans-serif; font-size: 1rem; font-weight: 400;
+  letter-spacing: -0.01em; color: var(--ink); transition: opacity 0.2s;
+}
+.prev-project:hover .prev-title { opacity: 0.6; }
+</style>
+</head>
+
+<body>
+
+<nav>
+  <a class="nav-back" href="index.html">← Back</a>
+  <a class="nav-name" href="index.html">Zachary Lu-Ming Fan</a>
+</nav>
+
+<!-- HERO -->
+<div class="case-hero">
+  <div class="case-hero-inner">
+    <div class="case-eyebrow">Case Study · 04</div>
+    <h1 class="case-title"><span>Shuttlesport</span><br>Booking Feature: Redesign</h1>
+    <p class="case-subtitle">Shuttlesport Badminton Academy — Redesigning the Class Booking Experience</p>
+    <div class="case-meta-grid">
+      <div class="case-meta-item">
+        <div class="case-meta-label">Client</div>
+        <div class="case-meta-value">Shuttlesport Badminton Academy Ltd.</div>
+      </div>
+      <div class="case-meta-item">
+        <div class="case-meta-label">My Role</div>
+        <div class="case-meta-value">UX/UI Designer</div>
+      </div>
+      <div class="case-meta-item">
+        <div class="case-meta-label">Team</div>
+        <div class="case-meta-value">4 UX/UI Designers</div>
+      </div>
+      <div class="case-meta-item">
+        <div class="case-meta-label">Year</div>
+        <div class="case-meta-value">2024</div>
+      </div>
+    </div>
+  </div>
+  <div class="case-hero-img">
+    <img src="ss-case-study-landing-img.png" alt="Shuttlesport Badminton Academy — Case Study">
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="case-content">
+
+  <!-- OVERVIEW -->
+  <div class="case-section">
+    <div class="section-label">Overview</div>
+    <h2 class="section-heading">A beloved club. A booking process<br><strong>that gets in the way.</strong></h2>
+    <p class="section-body">Shuttlesport Badminton Academy is a local badminton and pickleball club in Port Coquitlam, BC. Despite strong community engagement, their existing website made it difficult for players and new members to discover, register for, and pay for classes — creating unnecessary friction at every step of the experience.</p>
+    <div class="overview-grid">
+      <div class="overview-block">
+        <div class="overview-block-label">The Brief</div>
+        <div class="overview-block-text">Redesign the Shuttlesport website to reduce friction in the class booking journey — from initial discovery through schedule browsing, registration, waiver completion, and payment.</div>
+      </div>
+      <div class="overview-block">
+        <div class="overview-block-label">The Solution</div>
+        <div class="overview-block-text">A streamlined booking flow with a redesigned activity calendar, an integrated cart and booking summary, an in-line waiver form, and a consolidated payment screen — all tied to a personal user profile.</div>
+      </div>
+    </div>
+    <div class="case-tags">
+      <span class="case-tag">UI Design</span>
+      <span class="case-tag">UX Design</span>
+      <span class="case-tag">UX Research</span>
+      <span class="case-tag">Prototyping</span>
+      <span class="case-tag">Figma</span>
+      <span class="case-tag">User Workshop</span>
+      <span class="case-tag">Journey Mapping</span>
+    </div>
+  </div>
+
+  <!-- RESEARCH & ETHNOGRAPHY -->
+  <div class="case-section">
+    <div class="section-label">Research</div>
+    <h2 class="section-heading">Understanding the club — <strong>from the inside out.</strong></h2>
+    <p class="section-body">We began with ethnographic research at Shuttlesport itself — attending drop-in sessions, observing how members navigated the existing website, and speaking informally with players and coaches. This grounded our understanding in what was actually happening at the club, not just what users said in interviews.</p>
+    <p class="section-body">From this research we identified two distinct user groups who would shape our entire design direction: <strong>Kim</strong>, a recreational badminton and pickleball player representing the club's primary member base, and <strong>Thomas</strong>, a club coach whose perspective would later validate and reinforce our final design decisions.</p>
+
+    <div class="research-q">
+      <div class="research-q-label">Design Focus</div>
+      <div class="research-q-text">"How might we redesign the Shuttlesport website experience so that recreational players like Kim can easily discover, register for, and pay for classes — without confusion or unnecessary friction?"</div>
+    </div>
+  </div>
+
+  <!-- JOURNEY MAPS -->
+  <div class="case-section">
+    <div class="section-label">Journey Mapping</div>
+    <h2 class="section-heading">Two perspectives.<br><strong>One design focus.</strong></h2>
+    <p class="section-body">We mapped the end-to-end experience for both user types. Kim's journey — from first visit to post-registration — revealed clear pain points around schedule clarity, waiver friction, and payment confusion. Thomas's journey as a coach highlighted operational frustrations that, while distinct, ultimately reinforced the same core gaps in the booking flow.</p>
+
+    <div class="component-grid">
+      <div class="component-card">
+        <a href="#lb-1" class="lightbox-link" aria-label="Enlarge image"><img src="ss-user-journey-map.png" alt="Kim — User Journey Map"></a>
+        <div id="lb-1" class="lightbox">
+          <a href="#!" class="lightbox-backdrop" aria-label="Close enlarged image"></a>
+          <a href="#!" class="lightbox-close" aria-label="Close enlarged image">&times;</a>
+          <img src="ss-user-journey-map.png" alt="Kim — User Journey Map">
+        </div>
+        <div class="img-caption">Kim — Recreational Player Journey Map</div>
+      </div>
+      <div class="component-card">
+        <a href="#lb-2" class="lightbox-link" aria-label="Enlarge image"><img src="ss-coach-journey-map.png" alt="Thomas — Coach Journey Map"></a>
+        <div id="lb-2" class="lightbox">
+          <a href="#!" class="lightbox-backdrop" aria-label="Close enlarged image"></a>
+          <a href="#!" class="lightbox-close" aria-label="Close enlarged image">&times;</a>
+          <img src="ss-coach-journey-map.png" alt="Thomas — Coach Journey Map">
+        </div>
+        <div class="img-caption">Thomas — Club Coach Journey Map</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INITIAL CONCEPTS -->
+  <div class="case-section">
+    <div class="section-label">Initial Concepts</div>
+    <h2 class="section-heading">Exploring design directions<br><strong>before narrowing focus.</strong></h2>
+    <p class="section-body">We developed three initial design concepts — each exploring a different approach to the core booking problem. Concept 1 focused on redesigning the schedule and registration flow. Concept 2 explored a more profile-centric approach to class management. A third concept (social media revamp) was explored and ruled out early as outside the scope of what we could meaningfully redesign.</p>
+
+    <div class="component-grid">
+      <div class="component-card">
+        <a href="#lb-3" class="lightbox-link" aria-label="Enlarge image"><img src="ss-concept-design-1-1.png" alt="Concept Design 1.1"></a>
+        <div id="lb-3" class="lightbox">
+          <a href="#!" class="lightbox-backdrop" aria-label="Close enlarged image"></a>
+          <a href="#!" class="lightbox-close" aria-label="Close enlarged image">&times;</a>
+          <img src="ss-concept-design-1-1.png" alt="Concept Design 1.1">
+        </div>
+        <div class="img-caption">Concept 1.1 — Schedule & Registration Flow</div>
+      </div>
+      <div class="component-card">
+        <a href="#lb-4" class="lightbox-link" aria-label="Enlarge image"><img src="ss-concept-design-1-2.png" alt="Concept Design 1.2"></a>
+        <div id="lb-4" class="lightbox">
+          <a href="#!" class="lightbox-backdrop" aria-label="Close enlarged image"></a>
+          <a href="#!" class="lightbox-close" aria-label="Close enlarged image">&times;</a>
+          <img src="ss-concept-design-1-2.png" alt="Concept Design 1.2">
+        </div>
+        <div class="img-caption">Concept 1.2 — Schedule & Registration Flow (continued)</div>
+      </div>
+      <div class="component-card">
+        <a href="#lb-5" class="lightbox-link" aria-label="Enlarge image"><img src="ss-concept-design-2-1.png" alt="Concept Design 2.1"></a>
+        <div id="lb-5" class="lightbox">
+          <a href="#!" class="lightbox-backdrop" aria-label="Close enlarged image"></a>
+          <a href="#!" class="lightbox-close" aria-label="Close enlarged image">&times;</a>
+          <img src="ss-concept-design-2-1.png" alt="Concept Design 2.1">
+        </div>
+        <div class="img-caption">Concept 2.1 — Profile-Centric Approach</div>
+      </div>
+      <div class="component-card">
+        <a href="#lb-6" class="lightbox-link" aria-label="Enlarge image"><img src="ss-concept-design-2-2.png" alt="Concept Design 2.2"></a>
+        <div id="lb-6" class="lightbox">
+          <a href="#!" class="lightbox-backdrop" aria-label="Close enlarged image"></a>
+          <a href="#!" class="lightbox-close" aria-label="Close enlarged image">&times;</a>
+          <img src="ss-concept-design-2-2.png" alt="Concept Design 2.2">
+        </div>
+        <div class="img-caption">Concept 2.2 — Profile-Centric Approach (continued)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLIENT FEEDBACK / PAIN POINTS -->
+  <div class="case-section">
+    <div class="section-label">Client Presentation</div>
+    <h2 class="section-heading">Presenting concepts to the client — <strong>and what we learned.</strong></h2>
+    <p class="section-body">We presented the initial concepts directly to Shuttlesport. Their feedback, combined with our own analysis of the existing site, helped us pinpoint the specific pain points we needed to solve — and surfaced the reasoning behind which design direction to pursue.</p>
+
+    <div class="component-grid">
+      <div class="component-card">
+        <a href="#lb-7" class="lightbox-link" aria-label="Enlarge image"><img src="ss-existing-pain-points.png" alt="Narrowed Pain Points"></a>
+        <div id="lb-7" class="lightbox">
+          <a href="#!" class="lightbox-backdrop" aria-label="Close enlarged image"></a>
+          <a href="#!" class="lightbox-close" aria-label="Close enlarged image">&times;</a>
+          <img src="ss-existing-pain-points.png" alt="Narrowed Pain Points">
+        </div>
+        <div class="img-caption">Existing Pain Points — Narrowed from Research</div>
+      </div>
+      <div class="component-card">
+        <a href="#lb-8" class="lightbox-link" aria-label="Enlarge image"><img src="ss-concept-feedback.png" alt="Concept Feedback"></a>
+        <div id="lb-8" class="lightbox">
+          <a href="#!" class="lightbox-backdrop" aria-label="Close enlarged image"></a>
+          <a href="#!" class="lightbox-close" aria-label="Close enlarged image">&times;</a>
+          <img src="ss-concept-feedback.png" alt="Concept Feedback">
+        </div>
+        <div class="img-caption">Client Feedback on Initial Concepts</div>
+      </div>
+      <div class="component-card-wide">
+        <a href="#lb-9" class="lightbox-link" aria-label="Enlarge image"><img src="ss-design-solution-reasoning.png" alt="Design Solution Reasoning"></a>
+        <div id="lb-9" class="lightbox">
+          <a href="#!" class="lightbox-backdrop" aria-label="Close enlarged image"></a>
+          <a href="#!" class="lightbox-close" aria-label="Close enlarged image">&times;</a>
+          <img src="ss-design-solution-reasoning.png" alt="Design Solution Reasoning">
+        </div>
+        <div class="img-caption">Design Process Reflection — Reasoning Toward a Solution</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REFRAMED DESIGN FOCUS -->
+  <div class="case-section">
+    <div class="section-label">Reframed Focus</div>
+    <h2 class="section-heading">Refining the problem<br><strong>before designing the solution.</strong></h2>
+    <p class="section-body">The ethnographic research, journey maps, initial concepts, and client feedback all pointed us toward a more precise design focus. Rather than trying to redesign the entire website, we reframed around the core booking journey: the path a user like Kim takes from discovering an activity to completing registration and payment.</p>
+    <p class="section-body">This sharper focus became the lens for everything that followed — the user workshop, the refined concepts, and ultimately the final design.</p>
+
+    <div class="challenge-points">
+      <div class="challenge-point">
+        <div class="challenge-point-num">01</div>
+        <div class="challenge-point-text">Simplify activity discovery — make it easy to find what's on and when.</div>
+      </div>
+      <div class="challenge-point">
+        <div class="challenge-point-num">02</div>
+        <div class="challenge-point-text">Reduce registration friction — eliminate unnecessary steps in the booking flow.</div>
+      </div>
+      <div class="challenge-point">
+        <div class="challenge-point-num">03</div>
+        <div class="challenge-point-text">Integrate waiver and payment — keep users in a single, coherent flow.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- USER WORKSHOP -->
+  <div class="case-section">
+    <div class="section-label">User Workshop</div>
+    <h2 class="section-heading">Testing assumptions with<br><strong>real users.</strong></h2>
+    <p class="section-body">With a reframed design focus in place, we ran a structured user workshop to validate our direction and generate insights directly from the people who would use the product. The workshop combined roleplaying scenarios and a Rose, Bud, Thorn exercise to surface honest reactions to the existing experience and our proposed improvements.</p>
+
+    <div class="component-grid">
+      <div class="component-card">
+        <a href="#lb-10" class="lightbox-link" aria-label="Enlarge image"><img src="ss-user-workshop-structure.png" alt="User Workshop Structure"></a>
+        <div id="lb-10" class="lightbox">
+          <a href="#!" class="lightbox-backdrop" aria-label="Close enlarged image"></a>
+          <a href="#!" class="lightbox-close" aria-label="Close enlarged image">&times;</a>
+          <img src="ss-user-workshop-structure.png" alt="User Workshop Structure">
+        </div>
+        <div class="img-caption">Workshop Structure</div>
+      </div>
+      <div class="component-card">
+        <a href="#lb-11" class="lightbox-link" aria-label="Enlarge image"><img src="ss-user-workshop-goals.png" alt="User Workshop Goals"></a>
+        <div id="lb-11" class="lightbox">
+          <a href="#!" class="lightbox-backdrop" aria-label="Close enlarged image"></a>
+          <a href="#!" class="lightbox-close" aria-label="Close enlarged image">&times;</a>
+          <img src="ss-user-workshop-goals.png" alt="User Workshop Goals">
+        </div>
+        <div class="img-caption">Workshop Goals</div>
+      </div>
+      <div class="component-card">
+        <a href="#lb-12" class="lightbox-link" aria-label="Enlarge image"><img src="ss-user-workshop-participants.png" alt="User Workshop Participants"></a>
+        <div id="lb-12" class="lightbox">
+          <a href="#!" class="lightbox-backdrop" aria-label="Close enlarged image"></a>
+          <a href="#!" class="lightbox-close" aria-label="Close enlarged image">&times;</a>
+          <img src="ss-user-workshop-participants.png" alt="User Workshop Participants">
+        </div>
+        <div class="img-caption">Workshop Participants</div>
+      </div>
+      <div class="component-card">
+        <a href="#lb-13" class="lightbox-link" aria-label="Enlarge image"><img src="ss-user-workshop-roleplaying.png" alt="User Workshop Roleplaying"></a>
+        <div id="lb-13" class="lightbox">
+          <a href="#!" class="lightbox-backdrop" aria-label="Close enlarged image"></a>
+          <a href="#!" class="lightbox-close" aria-label="Close enlarged image">&times;</a>
+          <img src="ss-user-workshop-roleplaying.png" alt="User Workshop Roleplaying">
+        </div>
+        <div class="img-caption">Roleplaying Exercise</div>
+      </div>
+      <div class="component-card">
+        <a href="#lb-14" class="lightbox-link" aria-label="Enlarge image"><img src="ss-user-workshop-roleplaying-findings.png" alt="Roleplaying Findings"></a>
+        <div id="lb-14" class="lightbox">
+          <a href="#!" class="lightbox-backdrop" aria-label="Close enlarged image"></a>
+          <a href="#!" class="lightbox-close" aria-label="Close enlarged image">&times;</a>
+          <img src="ss-user-workshop-roleplaying-findings.png" alt="Roleplaying Findings">
+        </div>
+        <div class="img-caption">Roleplaying Findings</div>
+      </div>
+      <div class="component-card">
+        <a href="#lb-15" class="lightbox-link" aria-label="Enlarge image"><img src="ss-user-workshop-rose-bud-thorn.png" alt="Rose Bud Thorn Exercise"></a>
+        <div id="lb-15" class="lightbox">
+          <a href="#!" class="lightbox-backdrop" aria-label="Close enlarged image"></a>
+          <a href="#!" class="lightbox-close" aria-label="Close enlarged image">&times;</a>
+          <img src="ss-user-workshop-rose-bud-thorn.png" alt="Rose Bud Thorn Exercise">
+        </div>
+        <div class="img-caption">Rose, Bud, Thorn Exercise</div>
+      </div>
+      <div class="component-card">
+        <a href="#lb-16" class="lightbox-link" aria-label="Enlarge image"><img src="ss-user-workshop-rose-bud-thorn-findings.png" alt="RBT Findings"></a>
+        <div id="lb-16" class="lightbox">
+          <a href="#!" class="lightbox-backdrop" aria-label="Close enlarged image"></a>
+          <a href="#!" class="lightbox-close" aria-label="Close enlarged image">&times;</a>
+          <img src="ss-user-workshop-rose-bud-thorn-findings.png" alt="RBT Findings">
+        </div>
+        <div class="img-caption">Rose, Bud, Thorn — Findings</div>
+      </div>
+      <div class="component-card">
+        <a href="#lb-17" class="lightbox-link" aria-label="Enlarge image"><img src="ss-user-workshop-outcomes.png" alt="User Workshop Outcomes"></a>
+        <div id="lb-17" class="lightbox">
+          <a href="#!" class="lightbox-backdrop" aria-label="Close enlarged image"></a>
+          <a href="#!" class="lightbox-close" aria-label="Close enlarged image">&times;</a>
+          <img src="ss-user-workshop-outcomes.png" alt="User Workshop Outcomes">
+        </div>
+        <div class="img-caption">Workshop Outcomes</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REFINED DESIGN CONCEPT -->
+  <div class="case-section">
+    <div class="section-label">Refined Concepts</div>
+    <h2 class="section-heading">From workshop insights<br><strong>to a focused design concept.</strong></h2>
+    <p class="section-body">The workshop findings fed directly into our refined design concept. We moved from broad exploration to a cohesive design system — one that addressed the specific friction points we had validated with users. These refined concepts bridged the gap between research and the final prototype.</p>
+
+    <div class="component-grid">
+      <div class="component-card">
+        <a href="#lb-18" class="lightbox-link" aria-label="Enlarge image"><img src="ss-refined-design-concept-1.png" alt="Refined Design Concept 1"></a>
+        <div id="lb-18" class="lightbox">
+          <a href="#!" class="lightbox-backdrop" aria-label="Close enlarged image"></a>
+          <a href="#!" class="lightbox-close" aria-label="Close enlarged image">&times;</a>
+          <img src="ss-refined-design-concept-1.png" alt="Refined Design Concept 1">
+        </div>
+        <div class="img-caption">Refined Design Concept — Part 1</div>
+      </div>
+      <div class="component-card">
+        <a href="#lb-19" class="lightbox-link" aria-label="Enlarge image"><img src="ss-refined-design-concept-2.png" alt="Refined Design Concept 2"></a>
+        <div id="lb-19" class="lightbox">
+          <a href="#!" class="lightbox-backdrop" aria-label="Close enlarged image"></a>
+          <a href="#!" class="lightbox-close" aria-label="Close enlarged image">&times;</a>
+          <img src="ss-refined-design-concept-2.png" alt="Refined Design Concept 2">
+        </div>
+        <div class="img-caption">Refined Design Concept — Part 2</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FINAL DESIGN -->
+  <div class="case-section">
+    <div class="section-label">Final Design</div>
+    <h2 class="section-heading">The complete booking experience —<br><strong>from first visit to confirmation.</strong></h2>
+    <p class="section-body">The final design reimagines the Shuttlesport booking journey as a seamless, end-to-end flow. A redesigned activity calendar makes schedule discovery intuitive. A unified cart and booking summary brings together activities and lessons. An integrated waiver and payment screen eliminates the need to leave the booking context. And a personal profile gives members visibility into their upcoming classes at a glance.</p>
+
+    <!-- Desktop screenshots -->
+    <div class="component-grid" style="margin-top: 2rem;">
+      <div class="component-card">
+        <a href="#lb-20" class="lightbox-link" aria-label="Enlarge image"><img src="ss-final-design-desktop-1.png" alt="Final Design — Lessons Page"></a>
+        <div id="lb-20" class="lightbox">
+          <a href="#!" class="lightbox-backdrop" aria-label="Close enlarged image"></a>
+          <a href="#!" class="lightbox-close" aria-label="Close enlarged image">&times;</a>
+          <img src="ss-final-design-desktop-1.png" alt="Final Design — Lessons Page">
+        </div>
+        <div class="img-caption">Lessons Page — Redesigned</div>
+      </div>
+      <div class="component-card">
+        <a href="#lb-21" class="lightbox-link" aria-label="Enlarge image"><img src="ss-final-design-desktop-2.png" alt="Final Design — Activities Page"></a>
+        <div id="lb-21" class="lightbox">
+          <a href="#!" class="lightbox-backdrop" aria-label="Close enlarged image"></a>
+          <a href="#!" class="lightbox-close" aria-label="Close enlarged image">&times;</a>
+          <img src="ss-final-design-desktop-2.png" alt="Final Design — Activities Page">
+        </div>
+        <div class="img-caption">Activities Calendar — Redesigned</div>
+      </div>
+      <div class="component-card-wide">
+        <a href="#lb-22" class="lightbox-link" aria-label="Enlarge image"><img src="ss-final-design-desktop-3.png" alt="Final Design — Cart & Payment"></a>
+        <div id="lb-22" class="lightbox">
+          <a href="#!" class="lightbox-backdrop" aria-label="Close enlarged image"></a>
+          <a href="#!" class="lightbox-close" aria-label="Close enlarged image">&times;</a>
+          <img src="ss-final-design-desktop-3.png" alt="Final Design — Cart & Payment">
+        </div>
+        <div class="img-caption">Cart & Payment — Consolidated View</div>
+      </div>
+    </div>
+
+    <!-- Journey Map -->
+    <h3 style="font-family:'Outfit',sans-serif; font-weight:400; font-size:1.1rem; color:var(--ink); letter-spacing:-0.015em; margin-top: 3.5rem; margin-bottom: 0.5rem;">The booking journey — end to end.</h3>
+    <p class="section-body">Kim's final design journey map traces the complete 5-step flow, from initial discovery on the Shuttlesport homepage through to checking her personal schedule post-registration.</p>
+    <div class="full-img">
+      <a href="#lb-23" class="lightbox-link" aria-label="Enlarge image"><img src="ss-final-design-journey-map.png" alt="Final Design Journey Map"></a>
+      <div id="lb-23" class="lightbox">
+        <a href="#!" class="lightbox-backdrop" aria-label="Close enlarged image"></a>
+        <a href="#!" class="lightbox-close" aria-label="Close enlarged image">&times;</a>
+        <img src="ss-final-design-journey-map.png" alt="Final Design Journey Map">
+      </div>
+      <div class="img-caption">Final Design Journey Map — Kim (Recreational Player)</div>
+    </div>
+
+    <!-- Prototype walkthrough -->
+    <h3 style="font-family:'Outfit',sans-serif; font-weight:400; font-size:1.1rem; color:var(--ink); letter-spacing:-0.015em; margin-top: 3.5rem; margin-bottom: 0.5rem;">Prototype walkthrough.</h3>
+    <p class="section-body">Step-by-step through Kim's journey in the redesigned experience.</p>
+
+    <div class="proto-steps">
+
+      <div class="proto-step">
+        <div class="proto-step-meta">
+          <div class="proto-step-num">01</div>
+          <div class="proto-step-label">Step</div>
+          <div class="proto-step-title">Initial Touchpoints</div>
+          <div class="proto-step-text">Kim visits the Shuttlesport website from home to register for pickleball classes. The redesigned homepage gives her clear entry points to lessons, activities, and club information.</div>
+          <div class="insight-box">
+            <div class="insight-label">Design Decision</div>
+            <div class="insight-text">Clear navigation and prominent CTAs on the homepage reduce the time-to-discovery for new and returning users.</div>
+          </div>
+        </div>
+        <div>
+          <a href="#lb-24" class="lightbox-link" aria-label="Enlarge image"><img class="proto-step-img" src="ss-final-pp-initial-touchpoints.png" alt="Step 01 — Initial Touchpoints"></a>
+          <div id="lb-24" class="lightbox">
+            <a href="#!" class="lightbox-backdrop" aria-label="Close enlarged image"></a>
+            <a href="#!" class="lightbox-close" aria-label="Close enlarged image">&times;</a>
+            <img src="ss-final-pp-initial-touchpoints.png" alt="Step 01 — Initial Touchpoints">
+          </div>
+        </div>
+      </div>
+
+      <div class="proto-step">
+        <div class="proto-step-meta">
+          <div class="proto-step-num">02</div>
+          <div class="proto-step-label">Step</div>
+          <div class="proto-step-title">Calendar &amp; Schedule</div>
+          <div class="proto-step-text">Kim navigates to the Activities page to check when drop-ins, events, and pickleball classes are offered. She taps a Saturday slot to view available time slots, selects her activities, and also browses the Lessons page to register for Shuttle 1.</div>
+          <div class="insight-box">
+            <div class="insight-label">Design Decision</div>
+            <div class="insight-text">The calendar view + modal pattern lets users see availability and register without navigating away from their chosen date.</div>
+          </div>
+        </div>
+        <div class="proto-step-grid">
+          <a href="#lb-25" class="lightbox-link" aria-label="Enlarge image"><img class="proto-step-img" src="ss-final-pp-schedule1.png" alt="Step 02 — Activities Calendar"></a>
+          <div id="lb-25" class="lightbox">
+            <a href="#!" class="lightbox-backdrop" aria-label="Close enlarged image"></a>
+            <a href="#!" class="lightbox-close" aria-label="Close enlarged image">&times;</a>
+            <img src="ss-final-pp-schedule1.png" alt="Step 02 — Activities Calendar">
+          </div>
+          <a href="#lb-26" class="lightbox-link" aria-label="Enlarge image"><img class="proto-step-img" src="ss-final-pp-schedule2.png" alt="Step 02 — Class Selection Modal"></a>
+          <div id="lb-26" class="lightbox">
+            <a href="#!" class="lightbox-backdrop" aria-label="Close enlarged image"></a>
+            <a href="#!" class="lightbox-close" aria-label="Close enlarged image">&times;</a>
+            <img src="ss-final-pp-schedule2.png" alt="Step 02 — Class Selection Modal">
+          </div>
+          <a href="#lb-27" class="lightbox-link" aria-label="Enlarge image"><img class="proto-step-img" src="ss-final-pp-schedule3.png" alt="Step 02 — Lessons Page"></a>
+          <div id="lb-27" class="lightbox">
+            <a href="#!" class="lightbox-backdrop" aria-label="Close enlarged image"></a>
+            <a href="#!" class="lightbox-close" aria-label="Close enlarged image">&times;</a>
+            <img src="ss-final-pp-schedule3.png" alt="Step 02 — Lessons Page">
+          </div>
+          <a href="#lb-28" class="lightbox-link" aria-label="Enlarge image"><img class="proto-step-img" src="ss-final-pp-schedule4.png" alt="Step 02 — Booking Summary"></a>
+          <div id="lb-28" class="lightbox">
+            <a href="#!" class="lightbox-backdrop" aria-label="Close enlarged image"></a>
+            <a href="#!" class="lightbox-close" aria-label="Close enlarged image">&times;</a>
+            <img src="ss-final-pp-schedule4.png" alt="Step 02 — Booking Summary">
+          </div>
+        </div>
+      </div>
+
+      <div class="proto-step">
+        <div class="proto-step-meta">
+          <div class="proto-step-num">03</div>
+          <div class="proto-step-label">Step</div>
+          <div class="proto-step-title">Waiver</div>
+          <div class="proto-step-text">As Kim moves toward payment, she notices a waiver below. Since it's her first time at Shuttlesport, she fills out the form and submits it — without leaving the booking flow.</div>
+          <div class="insight-box">
+            <div class="insight-label">Design Decision</div>
+            <div class="insight-text">Integrating the waiver into the booking flow eliminates a major drop-off point that existed when it was a separate, easy-to-miss step.</div>
+          </div>
+        </div>
+        <div>
+          <a href="#lb-29" class="lightbox-link" aria-label="Enlarge image"><img class="proto-step-img" src="ss-final-pp-waiver.png" alt="Step 03 — Waiver"></a>
+          <div id="lb-29" class="lightbox">
+            <a href="#!" class="lightbox-backdrop" aria-label="Close enlarged image"></a>
+            <a href="#!" class="lightbox-close" aria-label="Close enlarged image">&times;</a>
+            <img src="ss-final-pp-waiver.png" alt="Step 03 — Waiver">
+          </div>
+        </div>
+      </div>
+
+      <div class="proto-step">
+        <div class="proto-step-meta">
+          <div class="proto-step-num">04</div>
+          <div class="proto-step-label">Step</div>
+          <div class="proto-step-title">Payment</div>
+          <div class="proto-step-text">Kim reaches the consolidated payment page — a single screen showing her order summary (activities + lesson) alongside payment options and card details. She reviews, fills in her information, and completes the transaction.</div>
+          <div class="insight-box">
+            <div class="insight-label">Design Decision</div>
+            <div class="insight-text">Consolidating the cart and payment onto one screen removes the back-and-forth that frustrated users in the existing flow.</div>
+          </div>
+        </div>
+        <div>
+          <a href="#lb-30" class="lightbox-link" aria-label="Enlarge image"><img class="proto-step-img" src="ss-final-pp-payment.png" alt="Step 04 — Payment"></a>
+          <div id="lb-30" class="lightbox">
+            <a href="#!" class="lightbox-backdrop" aria-label="Close enlarged image"></a>
+            <a href="#!" class="lightbox-close" aria-label="Close enlarged image">&times;</a>
+            <img src="ss-final-pp-payment.png" alt="Step 04 — Payment">
+          </div>
+        </div>
+      </div>
+
+      <div class="proto-step">
+        <div class="proto-step-meta">
+          <div class="proto-step-num">05</div>
+          <div class="proto-step-label">Step</div>
+          <div class="proto-step-title">Personal Schedule</div>
+          <div class="proto-step-text">After completing payment, Kim checks her profile and sees all her upcoming classes — Badminton Drop-In tomorrow and Shuttle 1 on Thursday — alongside her coach report and achievements. Registration confirmed.</div>
+          <div class="insight-box">
+            <div class="insight-label">Design Decision</div>
+            <div class="insight-text">A personal profile page closes the loop — giving users immediate confirmation and ongoing visibility into their schedule.</div>
+          </div>
+        </div>
+        <div>
+          <a href="#lb-31" class="lightbox-link" aria-label="Enlarge image"><img class="proto-step-img" src="ss-final-pp-payment-2.png" alt="Step 05 — Personal Schedule"></a>
+          <div id="lb-31" class="lightbox">
+            <a href="#!" class="lightbox-backdrop" aria-label="Close enlarged image"></a>
+            <a href="#!" class="lightbox-close" aria-label="Close enlarged image">&times;</a>
+            <img src="ss-final-pp-payment-2.png" alt="Step 05 — Personal Schedule">
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- REFLECTION -->
+  <div class="case-section">
+    <div class="section-label">Reflection</div>
+    <h2 class="section-heading">What this project<br><strong>taught us.</strong></h2>
+    <p class="section-body">Working directly with a real client and real users forced us to stay grounded. The ethnographic research, journey mapping, and user workshop all reinforced the same core insight: the friction wasn't in any single screen — it was in the gaps between them. The waiver no one noticed. The calendar that showed times but not availability. The payment page that appeared before users had confirmed what they were paying for.</p>
+    <p class="section-body">The final design addresses each of those gaps through integration rather than reinvention — keeping the Shuttlesport brand and structure intact while making every step of the booking journey feel like it belongs in the same flow.</p>
+
+    <div class="stat-row">
+      <div class="stat-pill">
+        <div class="stat-pill-num">5</div>
+        <div class="stat-pill-label">Booking steps<br>streamlined</div>
+      </div>
+      <div class="stat-pill">
+        <div class="stat-pill-num">2</div>
+        <div class="stat-pill-label">User groups<br>researched</div>
+      </div>
+      <div class="stat-pill">
+        <div class="stat-pill-num">4</div>
+        <div class="stat-pill-label">Initial concepts<br>explored</div>
+      </div>
+      <div class="stat-pill">
+        <div class="stat-pill-num">1</div>
+        <div class="stat-pill-label">Unified flow<br>delivered</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /case-content -->
+
+<!-- BOTTOM NAV -->
+<div class="case-bottom-nav">
+  <a class="back-link" href="index.html">← All projects</a>
+  <a class="prev-project" href="homescope_case_study.html">
+    <span class="prev-label">Previous project</span>
+    <span class="prev-title">← HomeScope Mobile Application</span>
+  </a>
+</div>
+
+</body>
+</html>
